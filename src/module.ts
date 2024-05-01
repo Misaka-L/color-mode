@@ -17,6 +17,9 @@ const DEFAULTS: ModuleOptions = {
   dataValue: '',
   storageKey: 'nuxt-color-mode',
   disableTransition: false,
+  attribute: '',
+  attributePrefix: '',
+  attributeSuffix: '',
 }
 
 export default defineNuxtModule({
@@ -35,7 +38,7 @@ export default defineNuxtModule({
     // Read script from disk and add to options
     const scriptPath = await resolver.resolve('./script.min.js')
     const scriptT = await fsp.readFile(scriptPath, 'utf-8')
-    type ScriptOption = 'storageKey' | 'preference' | 'globalName' | 'classPrefix' | 'classSuffix' | 'dataValue' | 'fallback'
+    type ScriptOption = 'storageKey' | 'preference' | 'globalName' | 'classPrefix' | 'classSuffix' | 'dataValue' | 'fallback' | 'attribute' | 'attributePrefix' | 'attributeSuffix'
     options.script = scriptT.replace(/<%= options\.([^ ]+) %>/g, (_, option: ScriptOption) => options[option])
 
     // Inject options via virtual template
@@ -182,4 +185,17 @@ export interface ModuleOptions {
    * @default false
    */
   disableTransition?: boolean
+  /**
+   * The attribute will be set to the html element with the value of the current color mode
+   * @default ''
+   */
+  attribute: string
+  /**
+   * @default ''
+   */
+  attributePrefix: string
+  /**
+   * @default ''
+   */
+  attributeSuffix: string
 }

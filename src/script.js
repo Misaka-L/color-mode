@@ -31,6 +31,8 @@
   function addColorScheme(value) {
     const className = '<%= options.classPrefix %>' + value + '<%= options.classSuffix %>'
     const dataValue = '<%= options.dataValue %>'
+    const attribute = '<%= options.attribute %>'
+    const attributeValue = '<%= options.attributePrefix %>' + value + '<%= options.attributeSuffix %>'
     if (de.classList) {
       de.classList.add(className)
     }
@@ -40,12 +42,16 @@
     if (dataValue) {
       de.setAttribute('data-' + dataValue, value)
     }
+    if (attribute) {
+      de.setAttribute(attribute, attributeValue)
+    }
   }
 
   /** @param {string} value */
   function removeColorScheme(value) {
     const className = '<%= options.classPrefix %>' + value + '<%= options.classSuffix %>'
     const dataValue = '<%= options.dataValue %>'
+    const attribute = '<%= options.attribute %>'
     if (de.classList) {
       de.classList.remove(className)
     }
@@ -54,6 +60,9 @@
     }
     if (dataValue) {
       de.removeAttribute('data-' + dataValue)
+    }
+    if (attribute) {
+      de.removeAttribute(attribute)
     }
   }
 
